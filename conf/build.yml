@@ -1,0 +1,410 @@
+type: component
+name: magno_sdk
+description: Magno MTS SDK
+license: ADC GmbH; all rights reserved
+major_version: 1
+schema_version: 2
+# We do not want to use system packages
+cmake_use_system_packages: false
+# We want to use Bricks core
+cmake_use_bricks_core: true
+# We want to use Bricks platforms
+cmake_use_platforms: true
+
+variants:
+  generic:
+    production:
+      platforms:
+        - build: vs2017
+          ctc: false
+        - build: vs2017_debug
+          ctc: false
+        - build: vs2017_win32
+          ctc: false
+        - build: vs2017_win32_debug
+          ctc: false
+        - build: linux64_x86_gcc_7-v2
+          ctc: false
+        - build: linux64_x86_gcc_7-v2-release
+          ctc: false
+        - build: ubuntu_20_04_x86_64
+          ctc: false
+        - build: ubuntu_20_04_x86_64-release
+          ctc: false
+        - build: ubuntu22_x86_64_gcc_asandeb
+          ctc: false
+          conan_profile: |
+            benchmark*: bricks_platform_name=ubuntu_20_04_x86_64
+            benchmark*: compiler.version=9.3.0
+            boost*: bricks_platform_name=ubuntu_20_04_x86_64
+            boost*: compiler.version=9.3.0
+            bzip2*: bricks_platform_name=ubuntu_20_04_x86_64
+            bzip2*: compiler.version=9.3.0
+            ced*: bricks_platform_name=ubuntu_20_04_x86_64
+            ced*: compiler.version=9.3.0
+            elfio*: bricks_platform_name=ubuntu_20_04_x86_64
+            elfio*: compiler.version=9.3.0
+            gtest*: bricks_platform_name=ubuntu_20_04_x86_64
+            gtest*: compiler.version=9.3.0
+            icu-magno*: bricks_platform_name=ubuntu_20_04_x86_64
+            icu-magno*: compiler.version=9.3.0
+            libbacktrace*: bricks_platform_name=ubuntu_20_04_x86_64
+            libbacktrace*: compiler.version=9.3.0
+            libyaml*: bricks_platform_name=ubuntu_20_04_x86_64
+            libyaml*: compiler.version=9.3.0
+            libxml2*: bricks_platform_name=ubuntu_20_04_x86_64
+            libxml2*: compiler.version=9.3.0
+            openssl*: bricks_platform_name=ubuntu_20_04_x86_64
+            openssl*: compiler.version=9.3.0
+            uriparser*: bricks_platform_name=ubuntu_20_04_x86_64
+            uriparser*: compiler.version=9.3.0
+            zlib*: bricks_platform_name=ubuntu_20_04_x86_64
+            zlib*: compiler.version=9.3.0
+            xmlwrapp*: bricks_platform_name=ubuntu_20_04_x86_64
+            xmlwrapp*: compiler.version=9.3.0
+        - build: ubuntu22_x86_64_gcc_reldeb
+          ctc: false
+          conan_profile: |
+            benchmark*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            benchmark*: compiler.version=9.3.0
+            benchmark*: build_type=Release
+            boost*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            boost*: compiler.version=9.3.0
+            boost*: build_type=Release
+            bzip2*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            bzip2*: compiler.version=9.3.0
+            bzip2*: build_type=Release
+            ced*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            ced*: compiler.version=9.3.0
+            ced*: build_type=Release
+            elfio*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            elfio*: compiler.version=9.3.0
+            elfio*: build_type=Release
+            gtest*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            gtest*: compiler.version=9.3.0
+            gtest*: build_type=Release
+            icu-magno*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            icu-magno*: compiler.version=9.3.0
+            icu-magno*: build_type=Release
+            libbacktrace*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            libbacktrace*: compiler.version=9.3.0
+            libbacktrace*: build_type=Release
+            libyaml*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            libyaml*: compiler.version=9.3.0
+            libyaml*: build_type=Release
+            libxml2*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            libxml2*: compiler.version=9.3.0
+            libxml2*: build_type=Release
+            openssl*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            openssl*: compiler.version=9.3.0
+            openssl*: build_type=Release
+            uriparser*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            uriparser*: compiler.version=9.3.0
+            uriparser*: build_type=Release
+            zlib*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            zlib*: compiler.version=9.3.0
+            zlib*: build_type=Release
+            xmlwrapp*: bricks_platform_name=ubuntu_20_04_x86_64-release
+            xmlwrapp*: compiler.version=9.3.0
+            xmlwrapp*: build_type=Release
+        # - build: linux64_gcc_cortex_a72_linux
+        #   ctc: false
+        # - build: ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        #   ctc: false
+      # components: &alias_components
+      #   - TARGET_COMPONENT
+      uses: &generic_production_uses
+        benchmark:
+          release: "1.8.3"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        boost:
+          variant: external
+          release: "1.83.0-rev1"
+          conan:
+            user: mts
+            channel: stable
+        bzip2:
+          release: "1.0.8-rev1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        ced:
+          release: "20220222"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        elfio:
+          release: "3.12-rev1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        gtest:
+          release: "1.8.1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        icu-magno:
+          release: "74.1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        libyaml:
+          release: "0.2.5-rev1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        libxml2:
+          release: "2.10.3-rev2"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        openssl:
+          release: "1.1.1t-rev1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        uriparser:
+          release: "0.9.6-rev1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        zlib:
+          release: "1.2.12-rev2"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+        xmlwrapp:
+          release: "0.9.1-rev4"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+      build_uses: &generic_production_build_uses
+        winflexbison:
+          release: "2.5.25"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+          platforms:
+            - vs2017
+            - vs2017_debug
+            - vs2017_win32
+            - vs2017_win32_debug
+        flex:
+          release: "2.6.4-rev2"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+          platforms:
+            - linux64_x86_gcc_7-v2
+            - linux64_x86_gcc_7-v2-release
+            - ubuntu_20_04_x86_64
+            - ubuntu_20_04_x86_64-release
+            - ubuntu22_x86_64_gcc_asandeb
+            - ubuntu22_x86_64_gcc_reldeb
+            - linux64_gcc_cortex_a72_linux
+            - ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        bison:
+          release: "3.8.2"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+          platforms:
+            - linux64_x86_gcc_7-v2
+            - linux64_x86_gcc_7-v2-release
+            - ubuntu_20_04_x86_64
+            - ubuntu_20_04_x86_64-release
+            - ubuntu22_x86_64_gcc_asandeb
+            - ubuntu22_x86_64_gcc_reldeb
+            - linux64_gcc_cortex_a72_linux
+            - ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        # llvm-tools:
+        #   release: "16.0.0"
+        #   variant: external
+        #   conan:
+        #     user: mts
+        #     channel: stable
+        #   platforms:
+        #     - vs2017
+        #     - vs2017_debug
+    # testing:
+    #   GENERIC:
+    #     platforms:
+    #       - build: vs2017
+    #         ctc: false
+    #       - build: vs2017_debug
+    #         ctc: false
+    #       - build: vs2017_win32
+    #         ctc: false
+    #       - build: vs2017_win32_debug
+    #         ctc: false
+    #       - build: linux64_x86_gcc_7-v2
+    #         ctc: false
+    #       - build: linux64_x86_gcc_7-v2-release
+    #         ctc: false
+    #       - build: ubuntu_20_04_x86_64
+    #         ctc: false
+    #       - build: ubuntu_20_04_x86_64-release
+    #         ctc: false
+    #       - build: ubuntu22_x86_64_gcc_reldeb
+    #         ctc: false
+    #       - build: ubuntu22_x86_64_gcc_asandeb
+    #         ctc: false
+    #       # - build: linux64_gcc_cortex_a72_linux
+    #       #   ctc: false
+    #       # - build: ubuntu_20_04_aarch64_qnx_pip120_reldeb
+    #       #   ctc: false
+    #     # components: *alias_components
+    #     uses: *generic_production_uses
+  # This variant is for the Ninja build system
+  ninja:
+    production:
+      platforms:
+        - build: vs2017
+          ctc: false
+        - build: vs2017_debug
+          ctc: false
+        - build: vs2017_win32
+          ctc: false
+        - build: vs2017_win32_debug
+          ctc: false
+        - build: linux64_x86_gcc_7-v2
+          ctc: false
+        - build: linux64_x86_gcc_7-v2-release
+          ctc: false
+        - build: ubuntu_20_04_x86_64
+          ctc: false
+        - build: ubuntu_20_04_x86_64-release
+          ctc: false
+        # - build: ubuntu22_x86_64_gcc_reldeb
+        #   ctc: false
+        # - build: ubuntu22_x86_64_gcc_asandeb
+        #   ctc: false
+        # - build: linux64_gcc_cortex_a72_linux
+        #   ctc: false
+        # - build: ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        #   ctc: false
+      # components: &ninja_build_components
+      #   - TARGET_COMPONENT
+      build_uses:
+        ninja: &ninja_generator
+          release: "1.10.2"
+          variant: "external"
+          conan:
+            user: 3rdparty
+            channel: releases
+          # https://cip-docs.cmo.conti.de/static/docfiles/cip_bricks_user_doc/v4.21.1/how_to/package_owner/main_page.html#build-packages-with-ninja-build-system
+          platforms:
+            - vs2017
+            - vs2017_debug
+            - vs2017_win32
+            - vs2017_win32_debug
+            - linux64_x86_gcc_7-v2
+            - linux64_x86_gcc_7-v2-release
+            - ubuntu_20_04_x86_64
+            - ubuntu_20_04_x86_64-release
+            - ubuntu22_x86_64_gcc_reldeb
+            - ubuntu22_x86_64_gcc_asandeb
+            - linux64_gcc_cortex_a72_linux
+            - ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        winflexbison:
+          release: "2.5.25"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+          platforms:
+            - vs2017
+            - vs2017_debug
+            - vs2017_win32
+            - vs2017_win32_debug
+        flex:
+          release: "2.6.4-rev1"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+          platforms:
+            - linux64_x86_gcc_7-v2
+            - linux64_x86_gcc_7-v2-release
+            - ubuntu_20_04_x86_64
+            - ubuntu_20_04_x86_64-release
+            - ubuntu22_x86_64_gcc_reldeb
+            - ubuntu22_x86_64_gcc_asandeb
+            - linux64_gcc_cortex_a72_linux
+            - ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        bison:
+          release: "3.8.2"
+          variant: external
+          conan:
+            user: mts
+            channel: stable
+          platforms:
+            - linux64_x86_gcc_7-v2
+            - linux64_x86_gcc_7-v2-release
+            - ubuntu_20_04_x86_64
+            - ubuntu_20_04_x86_64-release
+            - ubuntu22_x86_64_gcc_reldeb
+            - ubuntu22_x86_64_gcc_asandeb
+            - linux64_gcc_cortex_a72_linux
+            - ubuntu_20_04_aarch64_qnx_pip120_reldeb
+        # llvm-tools:
+        #   release: "16.0.0"
+        #   variant: external
+        #   conan:
+        #     user: mts
+        #     channel: stable
+        #   platforms:
+        #     - vs2017
+        #     - vs2017_debug
+      uses: *generic_production_uses
+    # testing:
+    #   GENERIC:
+    #     platforms:
+    #       - build: vs2017
+    #         ctc: false
+    #       - build: vs2017_debug
+    #         ctc: false
+    #       - build: vs2017_win32
+    #         ctc: false
+    #       - build: vs2017_win32_debug
+    #         ctc: false
+    #       - build: linux64_x86_gcc_7-v2
+    #         ctc: false
+    #       - build: linux64_x86_gcc_7-v2-release
+    #         ctc: false
+    #       - build: ubuntu_20_04_x86_64
+    #         ctc: false
+    #       - build: ubuntu_20_04_x86_64-release
+    #         ctc: false
+    #       - build: ubuntu22_x86_64_gcc_reldeb
+    #         ctc: false
+    #       - build: ubuntu22_x86_64_gcc_asandeb
+    #         ctc: false
+    #       # - build: linux64_gcc_cortex_a72_linux
+    #       #   ctc: false
+    #       # - build: ubuntu_20_04_aarch64_qnx_pip120_reldeb
+    #       #   ctc: false
+    #     build_uses:
+    #       ninja: *ninja_generator
+    #     uses: *generic_production_uses
+# tools:
+#   specs:
+#     - tool_spec: reporting/reporting/pre_reporting.yml
+#     - tool_spec: reporting/reporting/post_reporting.yml

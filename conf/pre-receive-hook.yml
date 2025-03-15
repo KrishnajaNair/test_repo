@@ -1,0 +1,16 @@
+"version": 1.0
+"validators":
+    "git_commit_validator":
+        # Optional parameter to switch on/off check of email-domains
+        "check_email_addresses": True
+
+    "jira_issue_validator":
+        "jira_configuration":
+            "SIMEN":
+                "server": "https://jira.auto.continental.cloud"
+                "jql": "status != Done"
+
+# log_level is used to configure the amount of log messages from the pre-receive-hook
+# supported levels are DEBUG,INFO,WARNING and ERROR
+# Wrong project config setting will enable default level INFO
+"log_level": "INFO"
