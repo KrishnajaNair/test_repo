@@ -1,5 +1,6 @@
 ##############################################
 # Recent version of CMake that has server mode enabled (at least 3.8).
+# comment
 cmake_minimum_required (VERSION 3.8)
 
 ##############################################
