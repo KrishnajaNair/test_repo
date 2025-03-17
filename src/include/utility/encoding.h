@@ -9,7 +9,7 @@
 #include <mts/runtime/definitions.h>
 #include <mts/runtime/types.h>
 #include <mts/runtime/visibility_control.h>
-
+#include <iostream>
 #include <uchar.h>
 
 MTS_BEGIN_C_HEADER
